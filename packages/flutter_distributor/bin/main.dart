@@ -9,8 +9,6 @@ import 'command_release.dart';
 import 'command_upgrade.dart';
 
 Future<void> main(List<String> args) async {
-  logger.info("sadfasfsadf");
-
   FlutterDistributor distributor = FlutterDistributor();
 
   final runner = CommandRunner('flutter_distributor', '');
@@ -42,8 +40,11 @@ Future<void> main(List<String> args) async {
   }
 
   if (argResults['version-check']) {
+    logger.info('Checking version');
     // Check version of flutter_distributor on every run
-    await distributor.checkVersion();
+    if (!await distributor.checkVersion()) {
+      logger.info('Up to date');
+    }
   }
 
   return runner.runCommand(argResults);
