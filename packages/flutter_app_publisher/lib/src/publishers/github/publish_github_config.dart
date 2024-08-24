@@ -29,9 +29,6 @@ class PublishGithubConfig extends PublishConfig {
       print("Using provided ${githubRepositoryOwner} from ENV ${kEnvGithubRepositoryOwner} as repo-owner");
       owner = githubRepositoryOwner;
     }
-    if ((owner ?? '').isEmpty) {
-      throw PublishError('<repo-owner> is null');
-    }
 
     String? name = publishArguments?['repo-name'];
     if ((owner ?? '').isEmpty && githubRepository?.isNotEmpty == true && githubRepository!.contains("/")) {
@@ -43,6 +40,9 @@ class PublishGithubConfig extends PublishConfig {
         throw PublishError('<repo-name> is mismatch error between ${githubRepository} from ENV ${kEnvGithubRepository} and ${githubRepositoryOwner} from ENV ${kEnvGithubRepositoryOwner}');
       }
       name = parts[1];
+    }
+    if ((owner ?? '').isEmpty) {
+      throw PublishError('<repo-owner> is null');
     }
     if ((name ?? '').isEmpty) {
       throw PublishError('<repo-name> is null');
