@@ -65,8 +65,10 @@ class AppPackagePublisherGithub extends AppPackagePublisher {
   Future<String?> _getUploadurlByReleaseName(
     PublishGithubConfig publishConfig,
   ) async {
+    var url = 'https://api.github.com/repos/${publishConfig.repoOwner}/${publishConfig.repoName}/releases';
+    print('Using URL: ${url}');
     Response resp = await _dio.get(
-      'https://api.github.com/repos/${publishConfig.repoOwner}/${publishConfig.repoName}/releases',
+      url,
     );
     List relist = (resp.data as List?) ?? [];
     var release = relist.firstWhere(
