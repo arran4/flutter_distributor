@@ -9,6 +9,8 @@ import 'command_release.dart';
 import 'command_upgrade.dart';
 
 Future<void> main(List<String> args) async {
+  logger.info("sadfasfsadf");
+
   FlutterDistributor distributor = FlutterDistributor();
 
   final runner = CommandRunner('flutter_distributor', '');
